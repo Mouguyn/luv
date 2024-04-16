@@ -20,11 +20,23 @@ function fadeIn(){
     }
 };
 
+var iframe = document.querySelector('iframe');
 
+// Đợi cho iframe tải hoàn tất
+iframe.onload = function() {
+    // Lấy trình phát âm nhạc bên trong iframe
+    var soundCloudPlayer = iframe.contentWindow;
+
+    // Nghe sự kiện kết thúc của bài hát
+    soundCloudPlayer.addEventListener('finish', function() {
+        // Sau khi bài hát kết thúc, chạy lại bài hát
+        soundCloudPlayer.api_play();
+    });
+};
 
 document.querySelector(".content").onclick=()=>{
     document.querySelector("#heart").hidden=false
-    document.querySelector("body").style.backgroundColor="#542246"
+    document.querySelector("body").style.backgroundColor="#F9B9A5"
     document.querySelector("#heart").hidden=false
     fadeIn()
 }
